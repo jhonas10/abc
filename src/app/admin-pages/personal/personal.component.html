@@ -1,0 +1,334 @@
+<div class="row" *ngIf="!editar" id="cardRegistrarPersonal">
+    <div class="col-md-12">
+        <div class="card card-user">
+          <div class="card-header">
+            <h5 class="card-title">Registro de personal</h5>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="registrarPersonal(formP)" #formP="ngForm">
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Nombres</label>
+                        <span *ngIf="formP.submitted && formP.controls['nombre'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                        <input type="text" class="form-control"
+                          name="nombre"
+                          [(ngModel)]="personal.nombre"
+                          required
+                          placeholder=""value="">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Apellidos</label>
+                        <span *ngIf="formP.submitted && formP.controls['apellido'].errors"
+                              class="text-danger animated fadeIn">(*)</span>
+                        <input type="text" class="form-control" placeholder=""value=""
+                        name="apellido"
+                        [(ngModel)]="personal.apellido"
+                        required>
+                      </div>
+                    </div>
+                </div>
+                  
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Cargo</label>
+                    <span *ngIf="formP.submitted && formP.controls['cargo'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                    <select class="form-control" id="control" 
+                      name="cargo"
+                      [(ngModel)]="personal.cargo"
+                      [disabled]="editar"
+                      required>
+                      <option>Ingeniero de Tramo</option>
+                      <option>Secretaria</option>
+                      <option>Gerente Regional</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label >Telefono</label>
+                    <span *ngIf="formP.submitted && formP.controls['telefono'].errors"
+                              class="text-danger animated fadeIn">(*)</span>
+                    <input type="text" class="form-control" placeholder=""value=""
+                    name="telefono"
+                    [(ngModel)]="personal.telefono"
+                    required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <span *ngIf="formP.submitted && formP.controls['email'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                      <input type="text" class="form-control" placeholder=""value=""
+                      name="email"
+                      [(ngModel)]="personal.email"
+                      required
+                      [disabled]="editar"
+                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
+                      >
+                    </div>
+                  </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Estado actual</label>
+                    <button *ngIf="personal.activo"
+                              (click)="personal.activo = false" name="activoBtn"
+                              class="btn btn-outline-success  form-control" type="button">
+                        Activo
+                      </button>
+                      <button *ngIf="!personal.activo"  name="inactivoBtn"
+                              (click)="personal.activo = true"
+                              class="btn btn-outline-danger  form-control" type="button">
+                          Inactivo
+                      </button>
+                    </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="!editar">
+                <div class="col-md-6" >
+                    <div class="form-group">
+                      <label>Contraseña</label>
+                      <span *ngIf="formP.submitted && formP.controls['password'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                      <div class="row">
+                        <div class="col-md-12 input-group">
+                          <input type="password" class="form-control" placeholder=""value="" 
+                          name="password"
+                          [type]="mostrarTexto ? 'text' : 'password'"
+                          [(ngModel)]="passwordUno"
+                          minlength="6"
+                          required>
+                          <div class="input-group-append">
+                            <span class="input-group-text ">
+                              <i
+                                class="fa"
+                                [ngClass]="{
+                                  'fa-eye-slash': !mostrarTexto,
+                                  'fa-eye': mostrarTexto
+                                }"
+                                (click)="mostrarContrasena()"
+                              ></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="form-group">
+                      <label >Confirme Contraseña</label>
+                      <span *ngIf="formP.submitted && formP.controls['confirmarPassword'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                    <div class="row">
+                        <div class="col-md-12 input-group">
+                          <input type="password" class="form-control" placeholder=""value="" 
+                          name="confirmarPassword"
+                          [type]="mostrarTexto2 ? 'text' : 'password'"
+                          [(ngModel)]="passwordDos"
+                          minlength="6"
+                          required>
+                          <div class="input-group-append">
+                            <span class="input-group-text ">
+                              <i
+                                class="fa"
+                                [ngClass]="{
+                                  'fa-eye-slash': !mostrarTexto2,
+                                  'fa-eye': mostrarTexto2
+                                }"
+                                (click)="mostrarContrasena2()"
+                              ></i>
+                            </span>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="update ml-auto mr-auto">
+                  <button *ngIf="!editar" type="submit" name="btnGuardarRegistro" class="btn btn-primary btn-round">Guardar</button>
+                  <button *ngIf="!editar"type="button" name="btnCancelarRegistro" class="btn btn-danger btn-round" (click)="cancelarRegistro(formP)">Cancelar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="row" *ngIf="editar">
+  <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Editar personal</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="editarPersonal(formE)" #formE="ngForm">
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nombres</label>
+                      <span *ngIf="formE.submitted && formE.controls['nombre'].errors"
+                              class="text-danger animated fadeIn">(*)</span>
+                      
+                      <input type="text" class="form-control"
+                        name="nombre"
+                        [(ngModel)]="personalEditar.nombre"
+                        required
+                        placeholder=""value="">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <span *ngIf="formE.submitted && formE.controls['apellido'].errors"
+                            class="text-danger animated fadeIn">(*)</span>
+                      <label>Apellidos</label>
+                      <input type="text" class="form-control" placeholder=""value=""
+                      name="apellido"
+                      [(ngModel)]="personalEditar.apellido"
+                      required>
+                    </div>
+                  </div>
+              </div>
+                
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <span *ngIf="formE.submitted && formE.controls['cargo'].errors"
+                              class="text-danger animated fadeIn">(*)</span>
+                  <label>Cargo</label>
+                  <select class="form-control" id="control" 
+                    name="cargo"
+                    [(ngModel)]="personalEditar.cargo"
+                    [disabled]="editar"
+                    required>
+                    <option>Ingeniero de Tramo</option>
+                    <option>Secretaria</option>
+                    <option>Gerente Regional</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <span *ngIf="formE.submitted && formE.controls['telefono'].errors"
+                            class="text-danger animated fadeIn">(*)</span>
+                  <label >Telefono</label>
+                  <input type="text" class="form-control" placeholder=""value=""
+                  name="telefono"
+                  [(ngModel)]="personalEditar.telefono"
+                  required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <span *ngIf="formE.submitted && formE.controls['email'].errors"
+                              class="text-danger animated fadeIn">(*)</span>
+                    <label>Email</label>
+                    <input type="text" class="form-control" placeholder=""value=""
+                    name="email"
+                    [(ngModel)]="personalEditar.email"
+                    required
+                    [disabled]="editar"
+                    >
+                  </div>
+                </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Estado actual</label>
+                  <button *ngIf="personalEditar.activo"
+                            (click)="personalEditar.activo = false"
+                            class="btn btn-outline-success  form-control" type="button">
+                      Activo
+                    </button>
+                    <button *ngIf="!personalEditar.activo" 
+                            (click)="personalEditar.activo = true"
+                            class="btn btn-outline-danger  form-control" type="button">
+                        Inactivo
+                    </button>
+                  </div>
+              </div>
+            </div>
+            
+
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button *ngIf="editar" type="submit" class="btn btn-success btn-round">Actualizar</button>
+                <button *ngIf="editar"type="button" class="btn btn-danger btn-round" (click)="cancelarActualizar(formE)">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!editar">
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title"> Personal</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Nombres
+                  </th>
+                  <th>
+                    Apellidos
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Telefono
+                  </th>
+                  <th>
+                    Estado
+                  </th> 
+                </thead>
+                <tbody>
+                  <tr *ngFor="let personal of personales">
+                    <td>{{personal.nombre}}</td>
+                    <td>{{personal.apellido}}</td>
+                    <td>{{personal.cargo}}</td>
+                    <td>{{personal.email}}</td>
+                    <td>{{personal.telefono}}</td>
+                    <td>
+                      <label *ngIf="personal.activo" class="badge badge-success text-white">Activo</label>
+                      <label *ngIf="!personal.activo" class="badge badge-danger text-white">Inactivo</label>
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                           (click)="updatePersonal(personal)" >
+                        <i class="fa fa-pencil"></i>
+                      </button>
+
+                      <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                            (click)="deletePersonal(personal)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

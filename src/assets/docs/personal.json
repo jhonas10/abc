@@ -1,0 +1,28 @@
+{
+    "it123121":{
+        "nit":123121,
+        "nombre":"Miguel Lazo",
+        "apellido":"",
+        "cargo":"Ingeniero de tramo",
+        "telefono":25454221,
+        "email":"mlazo@abc.com.bo",
+        "activo":true   
+    },
+    "gr321654":{
+        "nit":321654,
+        "nombre":"Renan Arratia Vilca",
+        "cargo":"Gerente Regional",
+        "telefono":25454221,
+        "email":"rarratia@abc.com.bo",
+        "activo":true
+    },
+    "se9874512":{
+        "nit":9874512,
+        "nombre":"Gonzales Solano Rebeca Tatiana",
+        "cargo":"Secretaria",
+        "telefono":25454221,
+        "email":"rgonzales@abc.com.bo",
+        "activo":true
+    }
+}
+    

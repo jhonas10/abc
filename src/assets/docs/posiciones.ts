@@ -1,0 +1,9 @@
+const ixiamas = new firebase.firestore.GeoPoint( -13.7676196,-68.1258503);
+const tumupasa = new firebase.firestore.GeoPoint( -14.149180461019963, -67.88876145857843);
+const sanbuenaaventura=new firebase.firestore.GeoPoint(  -14.438382529681226, -67.53496908141625);
+const rurrenabaque=new firebase.firestore.GeoPoint(  -14.43929684606175, -67.5298085112716 );
+const yucumbo=new firebase.firestore.GeoPoint(  -15.15057529506158, -67.03476010680052 );
+const yucumbo2=new firebase.firestore.GeoPoint(  -15.150916427134444, -67.03467339676665 );
+const quiquimbeyIP=new firebase.firestore.GeoPoint(  -15.388286555341972, -67.11663865832247);
+const caranavi1=new firebase.firestore.GeoPoint(  -15.839277544974276, -67.54931108967583);
+const caranaviM=new firebase.firestore.GeoPoint(  -15.83891302325027, -67.54989471315814);

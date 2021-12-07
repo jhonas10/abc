@@ -1,0 +1,435 @@
+<div class="row" *ngIf="!editar" id="cardRegistroEmpresa">
+  <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Registrar Empresa o Sociedad Accidental</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="guardarEmpresa( f )" #f="ngForm" class="validate-form flex-sb flex-w">
+            <div class="row">
+              <div class="col-md-12">
+                <span *ngIf="f.submitted && f.controls['nombreEmpresa'].errors"
+                                class="text-danger animated fadeIn">El nombre es obligatorio *</span>
+                <div class="form-group">
+                  <label>Nombre Empresa o Sociedad Accidental</label>
+                  <input 
+                  type="text"
+                  name="nombreEmpresa"
+                  class="form-control"
+                  [(ngModel)]="empresa.nombre"
+                  required
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <span *ngIf="f.submitted && f.controls['direccion'].errors"
+                                class="text-danger animated fadeIn">La dirección es obligatorio *</span>
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input 
+                  type="text" 
+                  name="direccion"
+                  class="form-control" 
+                  required
+                  [(ngModel)]="empresa.direccion"
+                 
+                  >
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <span *ngIf="f.submitted && f.controls['nit'].errors"
+                                class="text-danger animated fadeIn">El nit es obligatorio *</span>
+                <div class="form-group">
+                  <label>NIT</label>
+                  <input type="number" 
+                  class="form-control" 
+                  [(ngModel)]="empresa.nit"
+                  name="nit"
+                  required
+                  >
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <span *ngIf="f.submitted && f.controls['telefono'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label >Telefono</label>
+                  <input type="number"
+                    class="form-control"
+                    placeholder=""
+                    required
+                    [(ngModel)]="empresa.telefono"
+                    name="telefono">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <span *ngIf="f.submitted && f.controls['superinTelefono'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Superintendente Telefono</label> 
+                  <input type="text" 
+                  class="form-control" 
+                  placeholder="" 
+                  required
+                  [(ngModel)]="empresa.superinTelefono"
+                  name="superinTelefono">
+                </div>
+              </div>
+              <div class="col-md-8 pl-1">
+                <span *ngIf="f.submitted && f.controls['superinNombre'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Superintendente Nombre y Apellido </label>
+                  <input type="text" 
+                  class="form-control"
+                  required
+                  placeholder="" 
+                  [(ngModel)]="empresa.superinNombre"
+                  name="superinNombre"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 pr-1">
+                <span *ngIf="f.submitted && f.controls['nroObreros'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Numeros de Obreros</label>
+                  <input type="number" 
+                  class="form-control" 
+                  required
+                  placeholder="0"
+                  [(ngModel)]="empresa.nroObreros"
+                  name="nroObreros">
+                </div>
+              </div>
+              <div class="col-md-2 pl-1">
+                <span *ngIf="f.submitted && f.controls['nroCalificados'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Nro Calificados</label>
+                  <input type="number" 
+                  class="form-control" 
+                  required
+                  placeholder="0" 
+                  [(ngModel)]="empresa.nroCalificados"
+                  name="nroCalificados"
+                  >
+                </div>
+              </div>
+              <div class="col-md-2 pl-1">
+                <span *ngIf="f.submitted && f.controls['nroSemiCalificados'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Nro Semi Calificada</label>
+                  <input type="number" 
+                  required
+                  class="form-control" 
+                  placeholder="0"
+                  [(ngModel)]="empresa.nroSemiCalificados"
+                  name="nroSemiCalificados">
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>Contrato actual</label>
+                  <button *ngIf="empresa.activo" 
+                          name="btnContratoActivo"
+                          (click)="empresa.activo = false"
+                          class="btn btn-outline-success  form-control" type="button">
+                    Activo
+                  </button>
+                  <button *ngIf="!empresa.activo" 
+                          (click)="empresa.activo = true"
+                          name="btnContratoInactivo"
+                          class="btn btn-outline-danger  form-control" type="button">
+                      Inactivo
+                  </button>
+          
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button id="btnRegistrarEmpresa" type="submit" class="btn btn-primary btn-round">Guardar</button>
+                <button id="btnCancelarRegistroEmpresa" type="button" class="btn btn-danger btn-round"   (click)="cancelarRegistro(f)">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+    
+  </div>
+</div>
+<div class="row" *ngIf="editar">
+  <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Editar Empresa o Sociedad Accidental</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="guardarEmpresaEditada( formEditar )" #formEditar="ngForm" class="validate-form flex-sb flex-w">
+            <div class="row">
+              <div class="col-md-12">
+                <label>Nombre Empresa o Sociedad Accidental</label>
+                <span *ngIf="formEditar.submitted &&formEditar.controls['nombreEmpresaE'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                <div class="form-group">
+                  
+                  <input 
+                  type="text"
+                  name="nombreEmpresaE"
+                  class="form-control"
+                  [(ngModel)]="empresaEditar.nombre"
+                  required
+                  
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <label>Dirección</label>
+                <span *ngIf="formEditar.submitted &&formEditar.controls['direccionEditar'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                <div class="form-group">
+                  <input 
+                  type="text" 
+                  name="direccionEditar"
+                  class="form-control" 
+                  required
+                  [(ngModel)]="empresaEditar.direccion"
+                 
+                  >
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <label>NIT</label>
+                <span *ngIf="formEditar.submitted &&formEditar.controls['nitEditar'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                <div class="form-group">
+                  
+                  <input type="number" 
+                  class="form-control" 
+                  [(ngModel)]="empresaEditar.nit"
+                  name="nitEditar"
+                  required
+                  >
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label >Telefono</label>
+                <span *ngIf="formEditar.submitted &&formEditar.controls['telefono'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                  <input type="number"
+                    class="form-control"
+                    placeholder=""
+                    required
+                    [(ngModel)]="empresaEditar.telefono"
+                    name="telefono">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Superintendente Telefono</label> 
+                <span *ngIf="formEditar.submitted &&formEditar.controls['superinTelefonoEditar'].errors"
+                                class="text-danger animated fadeIn">(*)</span>
+                  <input type="number" 
+                  class="form-control" 
+                  placeholder="" 
+                  required
+                  [(ngModel)]="empresaEditar.superinTelefono"
+                  name="superinTelefonoEditar">
+                </div>
+              </div>
+              <div class="col-md-8 pl-1">
+                <span *ngIf="formEditar.submitted &&formEditar.controls['superinNombre'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Superintendente Nombre y Apellido </label>
+                  <input type="text" 
+                  class="form-control"
+                  required
+                  placeholder="" 
+                  [(ngModel)]="empresaEditar.superinNombre"
+                  name="superinNombre"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 pr-1">
+                <span *ngIf="formEditar.submitted &&formEditar.controls['nroObreros'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Numeros de Obreros</label>
+                  <input type="number" 
+                  class="form-control" 
+                  required
+                  placeholder="0"
+                  [(ngModel)]="empresaEditar.nroObreros"
+                  name="nroObreros">
+                </div>
+              </div>
+              <div class="col-md-2 pl-1">
+                <span *ngIf="formEditar.submitted &&formEditar.controls['nroCalificados'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Nro Calificados</label>
+                  <input type="number" 
+                  class="form-control" 
+                  required
+                  placeholder="0" 
+                  [(ngModel)]="empresaEditar.nroCalificados"
+                  name="nroCalificados"
+                  >
+                </div>
+              </div>
+              <div class="col-md-2 pl-1">
+                <span *ngIf="formEditar.submitted &&formEditar.controls['nroSemiCalificados'].errors"
+                                class="text-danger animated fadeIn">Incompleto *</span>
+                <div class="form-group">
+                  <label>Nro Semi Calificada</label>
+                  <input type="number" 
+                  required
+                  class="form-control" 
+                  placeholder="0"
+                  [(ngModel)]="empresaEditar.nroSemiCalificados"
+                  name="nroSemiCalificados">
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label>Contrato actual</label>
+                  <button *ngIf="empresaEditar.activo" 
+                          (click)="empresaEditar.activo = false"
+                          class="btn btn-outline-success  form-control" type="button">
+                    Activo
+                  </button>
+                  <button *ngIf="!empresaEditar.activo" 
+                          (click)="empresaEditar.activo = true"
+                          class="btn btn-outline-danger  form-control" type="button">
+                      Inactivo
+                  </button>
+          
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button *ngIf="editar"  type="submit" class="btn btn-success btn-round">Actualizar</button>
+                <button type="button" class="btn btn-danger btn-round"   (click)="cancelarEditar(formEditar)">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+    
+  </div>
+</div>
+<div class="row" *ngIf="!editar">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Empresa o Sociedad Accidental</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table *ngIf="!cargando && empresas.length > 0"  class="table">
+              <thead class=" text-primary">
+                <th>
+                 Nombre 
+                </th>
+                <th>
+                  Dirección
+                </th>
+                <th>
+                  NIT
+                </th>
+                <th>
+                  Telefono
+                </th>
+                <th>
+                  Nro. Obreros
+                </th>
+                <th>
+                  Nro. Calificados
+                </th>
+                <th>
+                  Nro. Semi Calificados
+                </th>
+                <th>
+                  Supertintendente Telefono
+                </th>
+                <th class="text-right">
+                  Supertintendete
+                </th>
+                <th >
+                  Estado
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let em of empresas">
+                  <td>{{em.nombre}}</td>
+                  <td>{{em.direccion}}</td>
+                  <td>{{em.nit}}</td>
+                  <td>{{em.telefono}}</td>
+                  <td>{{em.nroObreros}}</td>
+                  <td>{{em.nroCalificados}}</td>
+                  <td>{{em.nroSemiCalificados}}</td>
+                  <td>{{em.superinTelefono}}</td>
+                  <td>{{em.superinNombre}}</td>
+                  <td>
+                    <label *ngIf="em.activo" class="badge badge-success text-white">Activo</label>
+                    <label *ngIf="!em.activo" class="badge badge-danger text-white">Inactivo</label>
+                  </td>
+                  <td>
+                    <!-- <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                            [routerLink]="['/empresas',empresa.id]">
+                      <i class="fa fa-pencil"></i>
+                    </button> -->
+                    <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                            (click)="updateEmpresa(em)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+
+                    <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                            (click)="eliminarEmpresa(em)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="!cargando && empresas.length == 0"
+                class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary">
+                <h4 class="alert-heading">No existen empresas registradas</h4>
+                <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+            </div>
+            <div *ngIf="cargando" 
+                class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary" data-notify="container">
+                <h4 class="alert-heading">Cargando...</h4>
+                <span data-notify="icon" class="nc-icon nc-refresh-69"></span>
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>

@@ -1,0 +1,187 @@
+{
+    "rvf-000e-v" : {
+        "codigo" : "-",
+        "nombre" : "El Alto Viacha - No es RFV",
+        "ingTramo":"",
+        "longitud":"",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-000m-t" : {
+        "codigo" : "LP01",
+        "nombre" : "Machaca - Tihuanaco (SIN NOMBRE)",
+        "inicioRvf": [],
+        "punto 2": ""
+    },
+    "rvf-001" : {
+      "codigo" : "LP01",
+      "nombre" : "Autopista - La Cumbre",
+      "punto 1": "",
+      "punto 2": ""
+    },
+    "rvf-002" : {
+        "codigo" : "LP02",
+        "nombre" : "Unduavi - Santa Barbara",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-003" : {
+        "codigo" : "LP02R",
+        "nombre" : "San Buenaventura - Tumupasa",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-004" : {
+        "codigo" : "LP02R",
+        "nombre" : "Tumupasa - Ixiamas",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-005" : {
+        "codigo" : "LP03",
+        "nombre" : "Achacachi - Escoma",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-006" : {
+        "codigo" : "LP03R",
+        "nombre" : " : Quimibey - Yucumo",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-007" : {
+        "codigo" : "LP03R",
+        "nombre" : " : Yucumo - Rurrenabaque",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-008" : {
+        "codigo" : "LP04",
+        "nombre" : "El Alto",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-009" : {
+        "codigo" : "LP04",
+        "nombre" : "Huarina - Achacachi",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-011" : {
+        "codigo" : "LP04",
+        "nombre" : "Rio Seco - La Cumbre",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-012" : {
+        "codigo" : "LP04",
+        "nombre" : "Huarina - Tiquina",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-013" : {
+        "codigo" : "LP04",
+        "nombre" : "Rio Seco - Huarina",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-014" : {
+        "codigo" : "LP04R",
+        "nombre" : "Ixiamas - Alto Madidi - Chive",
+        "lat1":-12.393532571591834,
+        "long1":-68.58632942390531,
+        "lat2":-13.7676196,
+        "long2":-68.1258503
+    },
+    "rvf-015" : {
+        "codigo" : "LP05",
+        "nombre" : "Apolo - Tumupasa",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-016" : {
+        "codigo" : "LP05",
+        "nombre" : "Charazani - Cruce Apolo",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-017" : {
+        "codigo" : "LP06",
+        "nombre" : "Caranavi - Quiquibey",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-018" : {
+        "codigo" : "LP06",
+        "nombre" : "Santa Barbara - Caranavi",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-019" : {
+        "codigo" : "LP07",
+        "nombre" : "Caranavi - Cruce Apolo",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-020" : {
+        "codigo" : "LP08",
+        "nombre" : "Coroico - Puente Villa",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-021" : {
+        "codigo" : "LP08",
+        "nombre" : "Puente Villa - Punte Sacambaya",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-022" : {
+        "codigo" : "LP08",
+        "nombre" : "Unduavi - Puente Villa",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-023" : {
+        "codigo" : "LP09",
+        "nombre" : "La Paz - Oruro",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-024" : {
+        "codigo" : "LP09",
+        "nombre" : ": La Paz - Oruro",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-025" : {
+        "codigo" : "LP10",
+        "nombre" : ": Viacha - Cacharaña",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-026" : {
+        "codigo" : "LP11",
+        "nombre" : "Nazacara - Hito IV",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-027" : {
+        "codigo" : "LP12",
+        "nombre" : "Caquiaviri - Nazacara",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-028" : {
+        "codigo" : "LP12",
+        "nombre" : "Patacamaya - Caquiaviri",
+        "punto 1": "",
+        "punto 2": ""
+    },
+    "rvf-029" : {
+        "codigo" : "LP13",
+        "nombre" : "Rio Seco - Desaguadero",
+        "punto 1": "",
+        "punto 2": ""
+    }
+}
+  

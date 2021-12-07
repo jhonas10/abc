@@ -1,0 +1,396 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-user">
+          <div class="card-header">
+            <h5 class="card-title"  >Tramos - Red Vial Fundamental</h5>
+            <h5 class="card-title text-white" [hidden]="!tramo"  [style.backgroundColor]="tramo.color">
+              {{tramo.nombre}}
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="row ">
+                <div class="col-md-12 pr-1">
+                    <div class="form-group">
+                      <div id="mapTramos" class="map"></div>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-sm btn-outline-success btn-round btn-icon" id="btnMostrarRegistrar"
+                (click)="habilitarRegistro()" >
+                      <i class="nc-icon nc-simple-add"></i>
+                </button>
+                Registrar Tramo
+              </div>
+            </div>
+          </div>
+          
+          <!-- Registrar los tramos automaticamente -->
+          <!-- <button type="btn" class="btn btn-primary btn-round" (click)="tramosInfo()">Cargar Tramos</button> -->
+        </div>
+      </div>
+</div>
+<div class="row" *ngIf="registraTramo" id="cardRegistrarTramo">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Registrar Tramo</h5>
+        <div class="col-md-12 ">
+          <div class="form-group">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="validarTramo(f)" #f="ngForm">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Codigo Tramo</label>
+                <span *ngIf="f.submitted && f.controls['codigoTramo'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control" 
+                 name="codigoTramo"
+                [(ngModel)]="tramo.codigo"
+                required >
+              </div>
+            </div>
+            <div class="col-md-5 ">
+              <div class="form-group">
+                <label>Nombre del Tramo</label>
+                <span *ngIf="f.submitted && f.controls['nombreTramo'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control"  
+                 name="nombreTramo"
+                [(ngModel)]="tramo.nombre"
+                required >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Longitud (Km)</label>
+                <span *ngIf="f.submitted && f.controls['longitudTramo'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control" 
+                placeholder="0 Km"
+                name="longitudTramo"
+                [(ngModel)]="tramo.longitud"
+                required>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Color</label>
+                <span *ngIf="f.submitted && f.controls['colorTramo'].errors" class="text-danger animated fadeIn">(*)</span>
+                <div class="row">
+                  <div class="col-md-8">
+                    <input type="text" class="form-control"  value="" matInput [ngxMatColorPicker]="picker"
+                      placeholder=" Codigo Color" name="colorTramo"
+                      [(ngModel)]="tramo.color" 
+                      required >
+                  </div>
+                  <div class="col-md-2">
+                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                    <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Inicio Tramo</label>
+                <span *ngIf="f.submitted && f.controls['inicioRvfLatitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <span *ngIf="f.submitted && f.controls['inicioRvfLongitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="number" class="form-control"  
+                    placeholder="Latitud" name="inicioRvfLatitude"
+                    [(ngModel)]="inicioRvfLatitude"
+                    required >
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number"   class="form-control"  
+                    placeholder="Longitud" name="inicioRvfLongitude"
+                    [(ngModel)]="inicioRvfLongitude" 
+                    required >
+                  </div>
+                  <div class="col-md-1">
+                      <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                        (click)="buscarInicioTramo()">
+                              <i class="fa fa-map-pin"> </i>
+                      </button>
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                      (click)="quitarMarcadorInicio()">
+                            <i class="fa fa-minus-circle"> </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <label>Fin Tramo</label>
+                <span *ngIf="f.submitted && f.controls['finRvfLatitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <span *ngIf="f.submitted && f.controls['finRvfLongitude'].errors" class="text-danger animated fadeIn">(*)</span>  
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="number" class="form-control"  
+                    placeholder="Latitud" name="finRvfLatitude"
+                    [(ngModel)]="finRvfLatitude"
+                    required >
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number"   class="form-control"  
+                    placeholder="Longitud" name="finRvfLongitude"
+                    [(ngModel)]="finRvfLongitude" 
+                    required >
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                      (click)="buscarFinTramo()">
+                            <i class="fa fa-map-pin"> </i>
+                    </button>
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    (click)="quitarMarcadorFin()">
+                          <i class="fa fa-minus-circle"> </i>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round"  id="btnVerificarTramo">Verificar Tramo</button>
+              <button type="button" class="btn btn-outline-success btn-round" [disabled]="!tramoVerificado" id="btnGuardarTramo"  (click)="guardarTramo(f)">Guardar</button>
+              <button type="button" class="btn btn-danger btn-round"  id="btnCancelarTramo" (click)="cancelarRegistro(f)">Cancelar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="editar">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Editar Tramo</h5>
+        <div class="col-md-6 ">
+          <div class="form-group">
+           
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="verificarTramoEditado(formE)" #formE="ngForm">
+
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Codigo Tramo</label>
+                <span *ngIf="formE.submitted && formE.controls['codigoTramoE'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control" 
+                name="codigoTramoE"
+                [(ngModel)]="tramoEditar.codigo"
+                required >
+              </div>
+            </div>
+            <div class="col-md-5 ">
+              <div class="form-group">
+                <label>Nombre del tramoEditar</label>
+                <span *ngIf="formE.submitted && formE.controls['nombretramoEditar'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control"  
+                name="nombretramoEditar"
+                [(ngModel)]="tramoEditar.nombre"
+                required >
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Longitud (Km)</label>
+                <span *ngIf="formE.submitted && formE.controls['longitudtramoEditar'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control" 
+                placeholder="0 Km" name="longitudtramoEditar"
+                [(ngModel)]="tramoEditar.longitud"
+                required>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Color</label>
+                <span *ngIf="formE.submitted && formE.controls['colortramoEditar'].errors" class="text-danger animated fadeIn">(*)</span>
+                <div class="row">
+                  <div class="col-md-8">
+                    <input type="text" class="form-control"  value="" matInput [ngxMatColorPicker]="picker"
+                      placeholder=" Codigo Color" name="colortramoEditar"
+                      [(ngModel)]="tramoEditar.color" 
+                      required >
+                  </div>
+                  <div class="col-md-2">
+                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                    <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Inicio Tramo</label>
+                <span *ngIf="formE.submitted && formE.controls['inicioRvfLatitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <span *ngIf="formE.submitted && formE.controls['inicioRvfLongitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="number" class="form-control"  
+                    placeholder="Latitud" name="inicioRvfLatitude"
+                    [(ngModel)]="inicioRvfLatitude"
+                    required >
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number"   class="form-control"  
+                    placeholder="Longitud" name="inicioRvfLongitude"
+                    [(ngModel)]="inicioRvfLongitude" 
+                    required >
+                  </div>
+                  <div class="col-md-1">
+                      <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                        (click)="buscarInicioTramo()">
+                              <i class="fa fa-map-pin"> </i>
+                      </button>
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                      (click)="quitarMarcadorInicio()">
+                            <i class="fa fa-minus-circle"> </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <label>Fin Tramo</label>
+                <span *ngIf="formE.submitted && formE.controls['finRvfLatitude'].errors" class="text-danger animated fadeIn">(*)</span>
+                <span *ngIf="formE.submitted && formE.controls['finRvfLongitude'].errors" class="text-danger animated fadeIn">(*)</span>  
+                <div class="row">
+                  <div class="col-md-5">
+                    <input type="number" class="form-control"  
+                    placeholder="Latitud" name="finRvfLatitude"
+                    [(ngModel)]="finRvfLatitude"
+                    required >
+                  </div>
+                  <div class="col-md-5">
+                    <input type="number"   class="form-control"  
+                    placeholder="Longitud" name="finRvfLongitude"
+                    [(ngModel)]="finRvfLongitude" 
+                    required >
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                      (click)="buscarFinTramo()">
+                            <i class="fa fa-map-pin"> </i>
+                    </button>
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    (click)="quitarMarcadorFin()">
+                          <i class="fa fa-minus-circle"> </i>
+                  </button>
+                </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round" [hidden]="tramoVerificado">Verificar Tramo</button>
+              <button type="button" class="btn btn-outline-success btn-round" [hidden]="!tramoVerificado"  (click)="guardarTramoEditado(formE)">Guardar</button>
+              <button type="button" class="btn btn-danger btn-round"   (click)="cancelarEditar(formE)">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    
+</div>
+<div class="row" *ngIf="!editar">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-columns">
+            <div class="card" *ngFor="let tramo of tramos">
+              <div class="card-header" >
+                <h5 class="card-category">
+                  <b>{{tramo.codigo}}  </b>
+                </h5>
+                <h5 class="card-title text-white" [style.backgroundColor]="tramo.color">
+                  {{tramo.nombre}}
+                </h5>
+                <hr>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Longitud:</p></b>
+                  </div>
+                  <div class="col-md-6 " >
+                    <p>{{tramo.longitud}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Red Vial Inicio:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>({{tramo.inicioRvf.latitude}},{{tramo.inicioRvf.longitude}})</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Red Vial Fin:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>({{tramo.finRvf.latitude}},{{tramo.finRvf.longitude}})</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2 ">
+                    <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                    (click)="verTramo(tramo)" >
+                          <i class="nc-icon nc-zoom-split"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-2 ">
+                    <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                    (click)="editarTramo(tramo)" >
+                          <i class="fa fa-pencil"></i>
+                    </button>
+                  </div>
+                  <div class="col-md-2 ">
+                    <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    (click)="eliminarTramo(tramo)" >
+                          <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

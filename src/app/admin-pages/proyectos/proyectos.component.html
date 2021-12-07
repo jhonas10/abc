@@ -1,0 +1,433 @@
+<div class="row" *ngIf="!editar" id="cardRegistrarProyecto">
+    <div class="col-md-12">
+      <div class="card card-user">
+        <div class="card-header">
+          <h5 class="card-title">Registrar Proyecto</h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="registrarProyecto(formP)" #formP="ngForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Nombre del Proyecto</label>
+                  <span *ngIf="formP.submitted && formP.controls['nombreProyecto'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <input type="text" class="form-control" placeholder="" 
+                  value=""
+                  name="nombreProyecto"
+                  [(ngModel)]="proyecto.nombreProyecto"
+                  required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5 ">
+                <div class="form-group">
+                  <label>Tramos</label>
+                  <span *ngIf="formP.submitted && formP.controls['tramo'].errors"class="text-danger animated fadeIn">(*)</span>
+                  <select  class="form-control" name="tramo"  [(ngModel)]="tramo" (change)="selectedTramo(tramo)" required>
+                    <option *ngFor="let tramo of tramos" [ngValue]="tramo">
+                     {{tramo.codigo}} {{tramo.nombre}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <label>Longitud (Km)</label>
+                  <span *ngIf="formP.submitted && formP.controls['tramoLong'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <input type="text" class="form-control" name="tramoLong" *ngIf="tramo" value="{{tramo.longitud}}"  [(ngModel)]="proyecto.longitud" disabled>
+                  <input type="text" class="form-control" *ngIf="!tramo"  [disabled]="!tramoSel">
+                </div>
+              </div>
+              <div class="col-md-4 ">
+                <div class="form-group">
+                  <label>Ingeniero de Tramo Responsable</label>
+                  <span *ngIf="formP.submitted && formP.controls['ingTramo'].errors"class="text-danger animated fadeIn">(*)</span>
+                  <select class="form-control" id="controlIngTramo"  name="ingTramo" required [(ngModel)]="ingTramo" (change)="selectedIngeniero()"> 
+                      <option required *ngFor="let ingTramo of ingenieros"[ngValue]="ingTramo">
+                        {{ingTramo.nombre}} {{ingTramo.apellido}}
+                      </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <label>Empresa o sociedad a Cargo</label>
+                  <span *ngIf="formP.submitted && formP.controls['empresa'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <select class="form-control" id="controlEmpresa"  name="empresa" required [(ngModel)]="empresa" (change)="selectedEmpresa()" [disabled]="editar" > 
+                      <option required *ngFor="let empresa of empresas" [ngValue]="empresa">
+                        {{empresa.nombre}}
+                      </option>
+                    </select>
+                </div>
+              </div>
+              <div class="col-md-3 ">
+                <div class="form-group ">
+                  <label>Orden Proceder</label>
+                  <span *ngIf="formP.submitted && formP.controls['proceder'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <table>
+                    <tr>
+                      <td class="col-md-3">
+                        <input matInput [matDatepicker]="picker2" [min]="minDate" class="form-control" name="proceder" [(ngModel)]="proyecto.ordenProceder"  required></td>
+                      <td >  
+                        <mat-datepicker-toggle matSuffix [for]="picker2">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              
+              <div class="col-md-6 ">
+                <div class="form-group ">          
+                  <label>Fecha de Inicio de Servicios - Fecha conclusión de Obra </label>
+                  <span *ngIf="formP.submitted && formP.controls['inicioServicio'].errors" class="text-danger animated fadeIn">(inicio *)</span>
+                  <span *ngIf="formP.submitted && formP.controls['conslusionServicio'].errors" class="text-danger animated fadeIn"> (fin *)</span>   
+                  <table>
+                    <tr>
+                      <td class="col-md-6">
+                        <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate" class="form-control" [disabled]="editar">
+                          <input matStartDate placeholder="Inicio Servicio"  [(ngModel)]="proyecto.inicioServicio" name="inicioServicio" required >
+                          <input matEndDate placeholder="Conclusion Obra"  [(ngModel)]="proyecto.conclusionServicio" name="conslusionServicio" required>
+                        </mat-date-range-input>
+                      </td>
+                      <td >  
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              
+            </div>
+            
+            <div class="row">
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <label >Monto Vigente (Bs)</label>
+                  <span *ngIf="formP.submitted && formP.controls['monto'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <input type="number" class="form-control" placeholder="" name="monto" [(ngModel)]="proyecto.montoVigente" required>
+                </div>
+              </div>
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <label>Financiador/ Fuente de financiamiento</label>
+                  <span *ngIf="formP.submitted && formP.controls['finaciador'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <select class="form-control" id="controlFinaciador" 
+                  name="finaciador"
+                  [(ngModel)]="proyecto.financiador"
+                  [disabled]="editar"
+                  required>
+                  <option>T.G.N (Tesoro General de la Nación)</option>
+                  <option>B.I.D (Banco Internacional de Desarrollo)</option>
+                  <option>C.A.F (Comunidad Andina de Fomento)</option>
+                </select>
+                </div>
+              </div>
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <span *ngIf="formP.submitted && formP.controls['estado'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <label>Estado Actual del Servicio</label>
+                  <input type="text" class="form-control"  value="EJECUCIÓN" name="estado" [(ngModel)]="proyecto.estadoServicio" required>
+                </div>
+              </div>
+              <div class="col-md-3 ">
+                <div class="form-group">
+                  <label>Estado Proyecto</label>
+                  <button *ngIf="proyecto.activo" 
+                          (click)="proyecto.activo = false"
+                          class="btn btn-outline-success  form-control" type="button">
+                    Activo
+                  </button>
+                  <button *ngIf="!proyecto.activo" 
+                          (click)="proyecto.activo = true"
+                          name="inactivoBtn"
+                          class="btn btn-outline-danger form-control" type="button">
+                     Inactivo
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <span *ngIf="formP.submitted && formP.controls['realizar'].errors" class="text-danger animated fadeIn">(*)</span>
+                  <label>Problemas Identificados y Acciones</label>
+                  <textarea class="form-control textarea"
+                  name="realizar"
+                  [(ngModel)]="proyecto.realizarAcciones"
+                  required></textarea>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="update ml-auto mr-auto">
+                <button type="submit" class="btn btn-primary btn-round" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-danger btn-round" (click)="cancelarRegistro(formP)">Cancelar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>    
+</div>
+<div class="row" *ngIf="editar">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">Editar Proyecto</h5>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="actualizarProyecto(formE)" #formE="ngForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Nombre del Proyecto</label>
+                <span *ngIf="formE.submitted && formE.controls['nombreProyectoEditar'].errors" class="text-danger animated fadeIn">(*)</span>
+                <input type="text" class="form-control" placeholder="" 
+                value=""
+                name="nombreProyectoEditar"
+                [(ngModel)]="proyectoEditar.nombreProyecto"
+                required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 ">
+              <div class="form-group">
+                <label>Tramos</label>
+                <input type="text" class="form-control" name="tramoE"[disabled]="editar" [value]="proyectoEditar.tramo.nombre">
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <label>Longitud (Km)</label>
+               <input type="text" class="form-control" name="longitudE" [(ngModel)]="proyectoEditar.longitud"  [value]="proyectoEditar.longitud"   [disabled]="editar">
+              </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="form-group">
+                <label>Ingeniero de Tramo Responsable</label>
+                <span *ngIf="formE.submitted && formE.controls['ingTramoE'].errors"class="text-danger animated fadeIn">(*)</span>
+                <select class="form-control" id="controlIng"  name="ingTramoE" required [(ngModel)]="ingTramo" (change)="selectedIngeniero()"> 
+                    <option required *ngFor="let ingTramo of ingenieros" [ngValue]="ingTramo">
+                      {{ingTramo.nombre}} {{ingTramo.apellido}}
+                    </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <label>Empresa o sociedad a Cargo</label>
+                <input type="text" class="form-control" name="empresaE" [value]="proyectoEditar.empresa.nombre"  [disabled]="editar">
+                
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="form-group ">
+                <label>Orden Proceder</label>
+                <table>
+                  <tr>
+                    <td class="col-md-3">
+                      <input matInput [matDatepicker]="pickerOrden" class="form-control" name=" ordenProcederE" [value]="proyectoEditar.ordenProceder.toDate()" [disabled]="editar" required></td>
+                    <td >  
+                      <mat-datepicker-toggle matSuffix [for]="pickerOrden">
+                      </mat-datepicker-toggle>
+                      <mat-datepicker #pickerOrden></mat-datepicker>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            
+            <div class="col-md-6 ">
+              <div class="form-group ">
+                <label>Fecha de Inicio de Servicios - Fecha conclusión de Obra</label>        
+                <table >
+                  <tr>
+                    <td class="col-md-6">
+                      <mat-date-range-input [rangePicker]="picker" [min]="minDate" [max]="maxDate"  class="form-control" [disabled]="editar" required >
+                        <input matStartDate placeholder="Inicio Servicio" [value]="proyectoEditar.inicioServicio.toDate()" name="inicioServicio"  >
+                        <input matEndDate placeholder="Conclusion Obra"   [value]="proyectoEditar.conclusionServicio.toDate()" name="conclusionServicio"  required>
+                      </mat-date-range-input>
+                    </td>
+                    <td >  
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker [disabled]="editar" required></mat-date-range-picker>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            
+          </div>
+          
+          <div class="row">
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <label >Monto Vigente (Bs)</label>
+               <input type="number" class="form-control"  name="montoE" [(ngModel)]="proyectoEditar.montoVigente" [disabled]="editar" required>
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <label>Financiador/ Fuente de financiamiento</label>
+                <span *ngIf="formE.submitted && formE.controls['finaciadorE'].errors" class="text-danger animated fadeIn">(*)</span>
+                <select class="form-control" id="controlFinaciador" 
+                name="finaciadorE"
+                [(ngModel)]="proyectoEditar.financiador"
+                [disabled]="editar"
+                required>
+                <option>T.G.N (Tesoro General de la Nación)</option>
+                <option>B.I.D (Banco Internacional de Desarrollo)</option>
+                <option>C.A.F (Comunidad Andina de Fomento)</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <span *ngIf="formE.submitted && formE.controls['estadoE'].errors" class="text-danger animated fadeIn">(*)</span>
+                <label>Estado Actual del Servicio</label>
+                <input type="text" class="form-control"  value="EJECUCIÓN" name="estadoE" [(ngModel)]="proyectoEditar.estadoServicio" required>
+              </div>
+            </div>
+            <div class="col-md-3 ">
+              <div class="form-group">
+                <label>Estado proyectoEditar</label>
+                <button *ngIf="proyectoEditar.activo" 
+                        (click)="proyectoEditar.activo = false"
+                        class="btn btn-outline-success  form-control" type="button">
+                  Activo
+                </button>
+                <button *ngIf="!proyectoEditar.activo" 
+                        (click)="proyectoEditar.activo = true"
+                        class="btn btn-outline-danger form-control" type="button">
+                   Inactivo
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <span *ngIf="formE.submitted && formE.controls['realizar'].errors" class="text-danger animated fadeIn">(*)</span>
+                <label>Problemas Identificados y Acciones</label>
+                <textarea class="form-control textarea"
+                name="realizar"
+                [(ngModel)]="proyectoEditar.realizarAcciones"
+                required></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-success btn-round" >Editar</button>
+              <button type="button" class="btn btn-danger btn-round" (click)="cancelarActualizar()">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>    
+</div>
+<div class="row"  id="divProyectos" *ngIf="!editar">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> Proyectos de Conservación</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table *ngIf="!cargando && proyectos.length > 0"  class="table">
+            <thead class=" text-primary">
+              <th>
+                Nombre 
+              </th>
+              <th>
+                Tramo
+              </th>
+              <th>
+                Longitud
+              </th>
+              <th>
+                Ing. Tramo
+              </th>
+              <th>
+                Empresa
+              </th>
+              <th >
+                Orden de Proceder
+              </th>
+              <th >
+                Fecha Inicio Servicio - Fecha Conclusion
+              </th>
+              <th>
+                Monto Vigente
+              </th>
+              <th>
+                Financiador
+              </th>
+              <th>
+                Estado Servicio
+              </th>
+              <th >
+                Estado Proyecto
+              </th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let proyecto of proyectos">
+                <td>{{proyecto.nombreProyecto}}</td>
+                <td>{{proyecto.tramo.nombre}}</td>
+                <td>{{proyecto.longitud}}</td>
+                <td>{{proyecto.ingTramo.apellido}} {{proyecto.ingTramo.nombre}}</td>
+                <td>{{proyecto.empresa.nombre}}</td>
+                <td>{{proyecto.ordenProceder.toDate() | date:'dd/MM/yyyy'}}</td>
+                <td>{{proyecto.inicioServicio.toDate() | date:'dd/MM/yyyy'}} - {{proyecto.conclusionServicio.toDate() | date:'dd/MM/yyyy'}}</td>
+                <td>{{proyecto.montoVigente}} Bs.</td>
+                <td>{{proyecto.financiador}}</td>
+                <td>{{proyecto.estadoServicio}}</td>
+                <td>
+                  <label *ngIf="proyecto.activo" class="badge badge-success text-white">Activo</label>
+                  <label *ngIf="!proyecto.activo" class="badge badge-danger text-white">Inactivo</label>
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                    (click)="updateProyecto(proyecto)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+
+                  <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    (click)="deleteProyecto(proyecto)" >
+                    <i class="fa fa-trash"></i>
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="!cargando && proyectos.length == 0"
+              class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary">
+              <h4 class="alert-heading">No existen proyectos de conservación</h4>
+              <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+          </div>
+          <div *ngIf="cargando" 
+              class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary" data-notify="container">
+              <h4 class="alert-heading">Cargando...</h4>
+              <span data-notify="icon" class="nc-icon nc-refresh-69"></span>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

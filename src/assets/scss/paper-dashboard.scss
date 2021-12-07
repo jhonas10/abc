@@ -1,0 +1,39 @@
+/*!
+
+=========================================================
+* Paper Dashboard Angular - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-dashboard-angular
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-angular/blob/master/LICENSE.md)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
+@import 'paper-dashboard/variables';
+@import 'paper-dashboard/mixins2';
+
+// Plugins CSS
+@import "paper-dashboard/plugins/plugin-animate-bootstrap-notify";
+@import "paper-dashboard/plugins/plugin-perfect-scrollbar";
+
+// Core CSS and evethying is here
+@import "paper-dashboard/styles";
+
+@import "paper-dashboard/nucleo-outline";
+
+@import "paper-dashboard/sidebar-and-main-panel";
+
+// cards
+@import "paper-dashboard/cards";
+
+// angular differences
+@import "paper-dashboard/angular_diferences";
+
+@import "paper-dashboard/responsive";

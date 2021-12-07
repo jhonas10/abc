@@ -1,0 +1,17 @@
+{
+    "empresa001":{
+        "nit":123121,
+        "nombre":"ICC SRL",
+        "numero Obreros":"20",
+        "obreros calificados":"20",
+        "obreros semicalificados":"20",
+        "tramo":"Puentes Armas",
+        "superintendente nombre":"Ing. Max Paredes",
+        "superintendente email":"iccsrl@gmail.com",
+        "superintendente telefono":"72465217",
+        "telefono":"2430149",
+        "direccion":"Av landaeta nro ",
+        "activo":true
+    }
+}
+    

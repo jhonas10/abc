@@ -1,0 +1,106 @@
+<div class="row d-flex p-5 mb-4 justify-content-center" id="loginDiv">
+    
+    <div class="col-md-6" >
+        <div class="card card-user">
+            <form (ngSubmit)="login(f)"
+                #f="ngForm"
+                class="login100-form validate-form flex-sb flex-w">
+                <div class="image">
+                    <img src="assets\images\work.jpg" alt="...">
+                  </div>
+                  <div class="card-body">
+                    <div class="author">
+                        <img class="avatar border-gray" src="assets\images\login.png" alt="...">
+                        <h5 class="title">Iniciar Sesión</h5>
+                    </div>
+                    <div class="descripcion text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-md-7">
+                                <span *ngIf="f.submitted && f.controls['email'].errors"
+                                class="text-danger animated fadeIn">El correo es obligatorio</span>
+                                <div class=" form-group">
+                                    <input class=" form-control" 
+                                            type="email" 
+                                            name="email" 
+                                            [(ngModel)]="usuario.email"
+                                            required
+                                            email   
+                                            placeholder="Email">
+                
+                                    <span class="focus-input100"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                   
+                        <div class="row justify-content-center">
+                            <div class="col-md-7">
+                                <span *ngIf="f.submitted && f.controls['password'].errors"
+                                class="text-danger animated fadeIn">El campo debe contener al menos 6 caracteres.</span>
+                                <div class="form-group" >
+                                    <div class="row">
+                                        <div class="col-md-12 input-group">
+                                            <input class="col-md-12 form-control "
+                                            type="password" 
+                                                name="password"
+                                                minlength="6"
+                                                required 
+                                                [type]="mostrarTexto ? 'text' : 'password'"
+                                                [(ngModel)]="usuario.pasword"
+                                            placeholder="Contraseña">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text ">
+                                                  <i
+                                                    class="fa"
+                                                    [ngClass]="{
+                                                      'fa-eye-slash': !mostrarTexto,
+                                                      'fa-eye': mostrarTexto
+                                                    }"
+                                                    (click)="mostrarContrasena()"
+                                                  ></i>
+                                                </span>
+                                              </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                   
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="flex-sb-m">
+                                    <div class="form-check-radio">
+                                        <input [(ngModel)]="recordarme"
+                                        class="checkbox " id="ckb1" type="checkbox" name="remember-me">
+                                        <label class="" for="ckb1">
+                                            Recordar mi usuario
+                                        </label>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+                   
+                </div>
+                    
+                </div>
+                    <div class="card-footer">
+                    
+                        <div class="row">
+                            <div class="update ml-auto mr-auto">
+                            <button type="submit" name="btnLogin" class="btn btn-primary btn-round">Iniciar Sesion</button>
+                            </div>
+                        </div>
+                    </div>
+                  
+            </form>
+
+        </div>
+        
+    </div>
+</div>
+
+

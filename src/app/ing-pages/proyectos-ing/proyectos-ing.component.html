@@ -1,0 +1,399 @@
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-globe text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Proyectos Activos</p>
+                <p class="card-title" *ngIf="proyectos">{{proyectos.length}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-vector text-danger"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Avance Fisico Global </p>
+                <p class="card-title" *ngIf="proyectos">{{globalFisico | number:'1.0-0'}}%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+  
+  <div class="row" *ngIf="proyecto">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header ">
+            <h5 class="card-title text-white" [style.backgroundColor]="proyecto.tramo.color">
+              {{proyecto.nombreProyecto}}
+            </h5>
+          </div>
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Tramo:</p></b>
+                  </div>
+                  <div class="col-md-6 " >
+                    <p>{{proyecto.tramo.nombre}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Ing. Tramo :</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.ingTramo.apellido}} {{proyecto.ingTramo.nombre}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Empresa:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.nombre}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Empresa Superintendente:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.superinNombre}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Empresa Dirección:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.direccion}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Orden de Proceder:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.ordenProceder.toDate() | date:'dd/MM/yyyy'}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Inicio - Fin de Contrato:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.inicioServicio.toDate() | date:'dd/MM/yyyy'}} - {{proyecto.conclusionServicio.toDate() | date:'dd/MM/yyyy'}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Longitud:</p></b>
+                  </div>
+                  <div class="col-md-6 " >
+                    <p>{{proyecto.tramo.longitud}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p> Ing. Tramo Telefono:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.ingTramo.telefono}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p>Empresa Telefono:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.telefono}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p>Superintendente Telefono:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.superinTelefono}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p>Empresa Personal:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.empresa.nroObreros}} ( 
+                      {{proyecto.empresa.nroCalificados}} calificados -
+                      {{proyecto.empresa.nroSemiCalificados}} semicalificados )
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p>Estado del proyecto:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.estadoServicio}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4 text-primary">
+                    <b><p>Problemas identicados y acciones:</p></b>
+                  </div>
+                  <div class="col-md-6">
+                    <p>{{proyecto.realizarAcciones}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-md-12 pr-1">
+      <div class="card ">
+        <div class="card-body">
+          <div id="mapHome" class="map" ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" [hidden]="!proyecto">
+    <div class="col-md-12" >
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title" *ngIf="proyecto" >Avance Fisico General <b class="text-success">{{proyecto.avanceFisico}} %</b></h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12" id="contenedorAvanceFisico">
+                  <canvas id="chartAvanceFisico" width="400" height="100"></canvas>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="text-success">
+                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"
+                    (click)="agregarAvanceFisico()">
+                          <i class="nc-icon nc-simple-add"> </i>
+                    </button>
+                    Registrar Avance Fisico</p>
+                </div>
+                <div class="col-md-6"  *ngIf="avanceFisicoSelecionado">
+                  <p class="text-danger">
+                  <button class="btn btn-sm btn-outline-danger btn-round btn-icon"
+                    (click)="ocultarAvanceFisico()">
+                          <i class="fa fa-arrow-up"> </i>
+                    </button>
+                    Ocultar Registro</p>
+                </div>
+              </div>
+              <div class="row" *ngIf="avanceFisicoSelecionado">
+                <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Selecciona el peridodo</label>
+                          <!-- <span *ngIf="formP.submitted && formP.controls['ingTramo'].errors"class="text-danger animated fadeIn">(*)</span> -->
+                          <select class="form-control" id="control"  name="avanceFisico" required [(ngModel)]="avanceFisicoElegido" (change)="selectedAvanceFisico(avanceFisicoElegido)"> 
+                              <option required *ngFor="let avanceFisicoElegido of avanceFisicoList"  [ngValue]="avanceFisicoElegido">
+                                Periodo - {{avanceFisicoElegido.periodo}}
+                              </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <form (ngSubmit)="registrarAvanceFisico(formFisico)" #formFisico="ngForm">
+                    <div class="row" *ngIf="avanceFisico">
+                      <div class="col-md-12" *ngIf="avanceFisicoSeleCompletado">
+                        <label class="text-success"><b>Avance Fisico ya registrado</b> </label>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Actividad</label>
+                          <span *ngIf="formFisico.submitted && formFisico.controls['actividad'].errors" class="text-danger animated fadeIn">(*)</span>
+                          <input type="text" class="form-control" placeholder="" 
+                          name="actividad"
+                          [(ngModel)]="avanceFisico.actividad"
+                          [disabled]="avanceFisicoSeleCompletado"
+                          required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="avanceFisico">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Avance a registrar %</label>
+                          <span *ngIf="formFisico.submitted && formFisico.controls['avanceNuevo'].errors" class="text-danger animated fadeIn">(*)</span>
+                          <input type="number" class="form-control" placeholder="" 
+                          name="avanceNuevo"
+                          [(ngModel)]="avanceFisico.avance"
+                          [disabled]="avanceFisicoSeleCompletado"
+                          required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Fecha de Registro</label>
+                          <span *ngIf="formFisico.submitted && formFisico.controls['fechaRegistro'].errors" class="text-danger animated fadeIn">(*)</span>
+                          <table>
+                            <tr>
+                              <td class="col-md-3">
+                                <input [value]="avanceFisico.fechaRegistro.toDate() | date:'dd/MM/yyyy'" *ngIf="avanceFisicoSeleCompletado" class="form-control" disabled>
+                                <input matInput [matDatepicker]="picker"  [min]="minDateFisico"  class="form-control" name="fechaRegistro" [(ngModel)]="avanceFisico.fechaRegistro" [disabled]="avanceFisicoSeleCompletado" [hidden]="avanceFisicoSeleCompletado" required></td>
+                              <td>  
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="avanceFisico">
+                      
+                      <div class="col-md-12">
+                        <div class="form-group" >
+                          <label>Estado Avance</label>
+                          <button *ngIf="avanceFisico.completado" 
+                                  (click)="avanceFisico.completado = false"
+                                  class="btn btn-outline-success  form-control" [disabled]="avanceFisicoSeleCompletado" type="button">
+                            Completado
+                          </button>
+                          <button *ngIf="!avanceFisico.completado"
+                                  (click)="avanceFisico.completado = true"
+                                  class="btn btn-outline-danger form-control" [disabled]="avanceFisicoSeleCompletado" type="button">
+                            Sin Completar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" *ngIf="avanceFisico">
+                      <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-primary btn-round" *ngIf="!avanceFisicoSeleCompletado">Registrar</button>
+                        <button type="button" class="btn btn-danger btn-round" *ngIf="!avanceFisicoSeleCompletado" (click)="cancelarAvanceFisico(formFisico)">Cancelar</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="chart-legend">
+                <i class="fa fa-circle text-warning"></i> Avance Fisico de los periodos
+              </div>
+             </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-columns" *ngIf="!cargando && proyectos.length>0">
+          <div class="card" *ngFor="let proyecto of proyectos">
+            <div class="card-header" >
+              <h5 class="card-category">
+                <b>{{proyecto.tramo.codigo}}  </b>
+              </h5>
+              <h5 class="card-title text-white" [style.backgroundColor]="proyecto.tramo.color">
+                {{proyecto.nombreProyecto}}
+              </h5>
+              <hr>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4 text-primary">
+                  <b><p> Longitud:</p></b>
+                </div>
+                <div class="col-md-6 " >
+                  <p>{{proyecto.tramo.longitud}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-primary">
+                  <b><p> Ing. Tramo:</p></b>
+                </div>
+                <div class="col-md-6">
+                  <p>{{proyecto.ingTramo.apellido}} {{proyecto.ingTramo.nombre}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-primary">
+                  <b><p> Empresa:</p></b>
+                </div>
+                <div class="col-md-6">
+                  <p>{{proyecto.empresa.nombre}}</p>
+                </div>
+              </div>          
+              <div class="row">
+                <div class="col-md-4 ">
+                  <button class="btn btn-sm btn-outline-info btn-round btn-icon"
+                  (click)="verProyecto(proyecto)">
+                        <i class="nc-icon nc-zoom-split"> </i>
+                  </button>
+                  VER
+                </div>
+                
+              </div>
+  
+              
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!cargando && proyectos.length == 0"
+                class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary">
+                <h4 class="alert-heading">No existen proyectos activos</h4>
+                <span data-notify="icon" class="nc-icon nc-zoom-split"></span>
+            </div>
+        <div *ngIf="cargando" 
+                class="alert alert-dismissible alert-with-icon alert-dismissible fade show text-primary" data-notify="container">
+                <h4 class="alert-heading">Cargando...</h4>
+                <span data-notify="icon" class="nc-icon nc-refresh-69"></span>
+                
+            </div>
+      </div>
+    </div>
+  </div>

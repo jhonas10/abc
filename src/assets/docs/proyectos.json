@@ -1,0 +1,64 @@
+{
+    "proyecto":{
+      "financiador" : "T/N (tesoronacional)",
+      "procesoContratacion" : "T/N (tesoronacional)",
+      "nombreProyecto" : "Conservacion del tramos  LP05 Apolo Tumupasa",
+      "tramo":"LP-03 Tiquina - Kasani",
+      "longitud":"49.91 km",
+      "montoVigente":"2.595.619.34",
+      "empresa":"ICC SRL",
+      "conclusionVigente":"09/07/2020",
+      "plazoContarato":"",
+      "ingTramo":"",
+      "avanceFisico":"",
+      "avanceFinaciero":"",
+      "fechaInicioServicio":"",
+      "fechaConclusionObrea":"",
+      "tiempoTranscurrido":"",
+      "saldoMontoactualFecha":""
+      
+    },
+    "proyecto001":{
+        "Avance Fisico" : {
+            "tarea001" : {
+              "descripcion" : "Limpieza de Zanjas",
+              "fecha registro" : "18/09/2020",
+              "prioridad" : 5,
+              "realizado" : false,
+              "periodoAvance":""
+            },
+            "tarea002" : {
+              "descripcion" : "Limpieza carretera",
+              "prioridad" : 5,
+              "realizado" : false
+            }
+          },
+          "Avance Finaciero" : {
+            "pago001" : {
+              "descripcion" : "Limpieza de Zanjas",
+              "monto anadido": 2.5121,
+              "fecha registro" : "18/09/2020",
+              "prioridad" : 5,
+              "realizado" : false
+            },
+            "pago002" : {
+              "descripcion" : "Limpieza carretera",
+              "monto anadido": 2.5121,
+              "fecha registro" : "20/09/2020",
+              "realizado" : false
+            }
+          },
+          "financiador" : "T/N (tesoronacional)",
+          "nombreProyecto" : "Conservacion del tramos  LP05 Apolo Tumupasa",
+          "tramo":"LP-03 Tiquina - Kasani",
+          "longitud":"49.91 km",
+          "monto vigente":"2.595.619.34",
+          "empresa":"ICC SRL",
+          "conclusion vigente":"09/07/2020",
+          "contrato original":"gs://sigmantenimiento-edb27.appspot.com/contratooriginal.pdf",
+          "contrato modificado":"gs://sigmantenimiento-edb27.appspot.com/contratomodificado.pdf",
+          "acta de recepcion":"gs://sigmantenimiento-edb27.appspot.com/actarecepcion.pdf",
+          "informe final":"gs://sigmantenimiento-edb27.appspot.com/infromaefinal.pdf"
+    }
+}
+  
